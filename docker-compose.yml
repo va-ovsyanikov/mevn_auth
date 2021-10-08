@@ -1,0 +1,48 @@
+version: "3.5"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    env_file: 
+      - ./config/dev.env 
+    volumes:
+      - mongo-data:/data/db  
+    ports: 
+      - 27017:27017
+  
+
+  server:
+    image: server_dev
+    container_name: server
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    env_file: 
+      - ./config/dev.env  
+    ports: 
+      - 3001:3001  
+    volumes: 
+      - ./server/:/app
+      - /app/node_modules
+      - ./server/uploads/:/app/uploads
+    environment: 
+      - CHOKIDAR_USEPOLLING=true      
+
+
+  client:
+    image: client_dev
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 3002:3002
+    volumes: 
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+      - ./server/uploads:/app/public/image
+    environment: 
+      - CHOKIDAR_USEPOLLING=true      
+  
+volumes: 
+  mongo-data:

@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+
+
+  client:
+    image: client_prod
+    build: 
+      context: ./client
+      dockerfile: Dockerfile.prod
+    ports: 
+      - 80:80
+    env_file: 
+      - ./config/dev.env 
+    volumes: 
+      - ./server/uploads:/usr/share/nginx/html/image
+
+  server:
+    image: server_prod
+    build:
+      context: ./server
+      dockerfile: Dockerfile.prod
+    depends_on: 
+      - mongodb   
+    ports:
+      - 3001:3001
+    env_file: 
+      - ./config/dev.env  
+    volumes: 
+      - ./server/uploads:/app/uploads   
+
+
+
+ 
