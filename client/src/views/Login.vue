@@ -64,8 +64,8 @@ export default {
   },
 
   data: () => ({
-    password: "",
-    email: "",
+    password: "12345",
+    email: "va.ovsyanikov@gmail.com",
   }),
   computed: {
     ...mapGetters([
