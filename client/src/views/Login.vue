@@ -14,7 +14,7 @@
         >
           <div class="input-field col s12 m12 l6">
             <i class="material-icons prefix">markunread</i>
-            <label for="icon_email">Email</label>
+            <label class="active" for="icon_email">Email</label>
             <input
               id="icon_email"
               type="email"
@@ -25,7 +25,7 @@
 
           <div class="input-field col s12 m12 l6">
             <i class="material-icons prefix">lock</i>
-            <label for="icon_password">Password</label>
+            <label class="active" for="icon_password">Password</label>
             <input
               id="icon_password"
               type="text"
